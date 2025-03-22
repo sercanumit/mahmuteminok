@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="tr" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mahmut Emin OK | Tıp Öğrencisi & Astronomi Tutkunu</title>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <!--  CSS -->
+    <link rel="stylesheet" href="/mahmuteminok/src/css/output.css" />
+  </head>
+
+  <body class="bg-gray-900 text-white">
+    <!-- Preloader -->
+    <div
+      id="preloader"
+      class="fixed inset-0 z-[9999] flex items-center justify-center bg-gray-900"
+    >
+      <div class="preloader-content">
+        <div class="preloader-solar-system">
+          <div class="sun"></div>
+          <div class="earth">
+            <div class="moon"></div>
+          </div>
+        </div>
+        <div class="loading-text text-center mt-8">
+          <h3 class="text-white text-xl mb-2 font-medium">
+            Astronomi ve Tıp Dünyasına
+          </h3>
+          <p class="text-indigo-300 text-lg">Yolculuk başlıyor...</p>
+          <!-- Add counter element -->
+          <div class="counter-container mt-4">
+            <div class="counter-text text-xl font-bold text-indigo-400">
+              <span id="preloader-counter">0</span>%
+            </div>
+            <div
+              class="w-48 h-1 mx-auto mt-2 bg-gray-700 rounded-full overflow-hidden"
+            >
+              <div
+                id="preloader-progress-bar"
+                class="h-full w-0 bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-300"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+
+    <!-- Navbar -->
+    <nav
+      class="fixed w-full z-50 bg-gray-900 bg-opacity-80 backdrop-filter backdrop-blur-md"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <h1 class="text-xl font-bold">Mahmut Emin OK</h1>
+            </div>
+            <div class="hidden md:block">
+              <div class="ml-10 flex items-baseline space-x-4">
+                <a
+                  href="#home"
+                  class="px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-indigo-600 transition duration-300"
+                  >Ana Sayfa</a
+                >
+                <a
+                  href="#about"
+                  class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-indigo-600 hover:text-white transition duration-300"
+                  >Hakkımda</a
+                >
+                <a
+                  href="#medicine"
+                  class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-indigo-600 hover:text-white transition duration-300"
+                  >Tıp</a
+                >
+                <a
+                  href="#astronomy"
+                  class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-indigo-600 hover:text-white transition duration-300"
+                  >Astronomi</a
+                >
+                <a
+                  href="#contact"
+                  class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-indigo-600 hover:text-white transition duration-300"
+                  >İletişim</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="md:hidden">
+            <button
+              type="button"
+              id="mobile-menu-button"
+              class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-indigo-600 focus:outline-none"
+            >
+              <span class="sr-only">Menüyü aç</span>
+              <svg
+                class="h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu, show/hide based on menu state -->
+      <div class="hidden md:hidden" id="mobile-menu">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <a
+            href="#home"
+            class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-indigo-600 transition duration-300"
+            >Ana Sayfa</a
+          >
+          <a
+            href="#about"
+            class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-indigo-600 hover:text-white transition duration-300"
+            >Hakkımda</a
+          >
+          <a
+            href="#medicine"
+            class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-indigo-600 hover:text-white transition duration-300"
+            >Tıp</a
+          >
+          <a
+            href="#astronomy"
+            class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-indigo-600 hover:text-white transition duration-300"
+            >Astronomi</a
+          >
+          <a
+            href="#contact"
+            class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-indigo-600 hover:text-white transition duration-300"
+            >İletişim</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div class="space-y-8">
+            <h1 class="text-4xl md:text-6xl font-bold">
+              Merhaba, ben <span class="text-gradient">Mahmut Emin OK</span>
+            </h1>
+            <p class="text-xl text-gray-300">
+              Tıp öğrencisi, astronomi tutkunu ve bilim meraklısı.
+            </p>
+            <p class="text-gray-400 text-lg">
+              3. sınıf tıp öğrencisi olarak insan sağlığı için çalışırken,
+              evrenin sırlarını keşfetme tutkumu da sürdürüyorum.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a
+                href="#about"
+                class="px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition duration-300 inline-flex items-center"
+              >
+                Daha Fazla Keşfet
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 ml-2"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </a>
+              <a
+                href="#contact"
+                class="px-6 py-3 border border-indigo-500 text-indigo-500 font-medium rounded-lg hover:bg-indigo-900 hover:text-white transition duration-300"
+              >
+                İletişime Geç
+              </a>
+            </div>
+          </div>
+          <div class="flex justify-center lg:justify-end">
+            <div
+              class="relative h-80 w-80 md:h-96 md:w-96 rounded-full overflow-hidden border-4 border-indigo-500 shadow-xl shadow-indigo-500/20"
+            >
+              <!-- Placeholder for profile image -->
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-indigo-800 to-cyan-800 flex items-center justify-center"
+              >
+                <span class="text-3xl font-bold">ME</span>
+                <!-- You can replace this div with an actual image -->
+                <!-- <img src="path/to/mahmut-profile.jpg" alt="Mahmut Emin OK" class="h-full w-full object-cover"> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating planets decoration -->
+      <div
+        class="absolute -right-20 top-20 w-40 h-40 bg-purple-600 rounded-full opacity-20 blur-3xl"
+      ></div>
+      <div
+        class="absolute left-40 bottom-20 w-60 h-60 bg-indigo-600 rounded-full opacity-20 blur-3xl"
+      ></div>
+      <div
+        class="absolute right-1/3 top-1/2 w-20 h-20 bg-cyan-500 rounded-full opacity-30 blur-xl"
+      ></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 relative overflow-hidden about-section">
+      <!-- Decorative elements -->
+      <div
+        class="absolute top-1/4 left-0 w-72 h-72 bg-gradient-to-br from-indigo-600 to-purple-800 rounded-full filter blur-3xl opacity-10"
+      ></div>
+      <div
+        class="absolute bottom-1/4 right-0 w-72 h-72 bg-gradient-to-tr from-blue-700 to-cyan-600 rounded-full filter blur-3xl opacity-20"
+      ></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Hakkımda</h2>
+          <div
+            class="h-1 w-20 bg-gradient-to-r from-indigo-500 to-cyan-500 mx-auto"
+          ></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div class="order-2 lg:order-1">
+            <div class="space-y-6">
+              <div
+                class="bg-gray-800 bg-opacity-70 p-6 rounded-xl border border-gray-700 hover:border-indigo-500 transition duration-300 transform hover:-translate-y-1"
+              >
+                <h3 class="text-xl font-semibold mb-4 flex items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 mr-2 text-indigo-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    />
+                  </svg>
+                  Kişisel Bilgiler
+                </h3>
+                <p class="text-gray-300">
+                  Ben Mahmut Emin OK, Ondokuz Mayıs Üniversitesinde 3. sınıf tıp
+                  öğrencisiyim. Tıp alanında eğitimime devam ederken aynı
+                  zamanda astronomi ve uzay bilimleri konularına büyük ilgi
+                  duyuyorum. Bilimsel merakım ve öğrenme tutkum beni her iki
+                  alanda da sürekli araştırma yapmaya ve kendimi geliştirmeye
+                  yönlendiriyor.
+                </p>
+              </div>
+
+              <div
+                class="bg-gray-800 bg-opacity-70 p-6 rounded-xl border border-gray-700 hover:border-indigo-500 transition duration-300 transform hover:-translate-y-1"
+              >
+                <h3 class="text-xl font-semibold mb-4 flex items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 mr-2 text-indigo-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                    />
+                  </svg>
+                  Eğitim
+                </h3>
+                <ul class="space-y-3 text-gray-300">
+                  <li class="flex items-start">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 mr-2 text-cyan-400 flex-shrink-0 mt-0.5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span>Tıp Fakültesi, 3. Sınıf (2022-Devam Ediyor)</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 mr-2 text-cyan-400 flex-shrink-0 mt-0.5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span>LoL Gold Elo (2023)</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 mr-2 text-cyan-400 flex-shrink-0 mt-0.5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span>Samsun Anadolu Lisesi (2017-2021)</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div
+                class="bg-gray-800 bg-opacity-70 p-6 rounded-xl border border-gray-700 hover:border-indigo-500 transition duration-300 transform hover:-translate-y-1"
+              >
+                <h3 class="text-xl font-semibold mb-4 flex items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 mr-2 text-indigo-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                    />
+                  </svg>
+                  İlgi Alanları
+                </h3>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="px-3 py-1 bg-indigo-900 bg-opacity-70 rounded-full text-indigo-200"
+                    >Nöroloji</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-indigo-900 bg-opacity-70 rounded-full text-indigo-200"
+                    >Kardiyoloji</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-indigo-900 bg-opacity-70 rounded-full text-indigo-200"
+                    >Kozmoloji</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-indigo-900 bg-opacity-70 rounded-full text-indigo-200"
+                    >Astronomi</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-indigo-900 bg-opacity-70 rounded-full text-indigo-200"
+                    >Teleskop Gözlemleri</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-indigo-900 bg-opacity-70 rounded-full text-indigo-200"
+                    >Tıbbi Araştırmalar</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-indigo-900 bg-opacity-70 rounded-full text-indigo-200"
+                    >Katadioptrik Teleskop</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-indigo-900 bg-opacity-70 rounded-full text-indigo-200"
+                    >Bilimsel Yazı</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="order-1 lg:order-2 relative">
+            <div
+              class="relative z-10 bg-gray-800 bg-opacity-50 p-2 rounded-2xl border border-gray-700 shadow-xl"
+            >
+              <div class="aspect-w-1 aspect-h-1">
+                <div
+                  class="w-full h-full rounded-xl overflow-hidden border-2 border-indigo-500/30"
+                >
+                  <!-- Placeholder for about image -->
+                  <div
+                    class="w-full h-full bg-gradient-to-br from-indigo-700/70 to-purple-700/70 flex items-center justify-center"
+                  >
+                    <!-- Replace this with actual image when available -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-24 w-24 text-indigo-300/80"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1"
+                        d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <!-- Replace placeholder: <img src="path/to/mahmut-about.jpg" alt="Mahmut Emin OK" class="w-full h-full object-cover"> -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Floating decorative elements -->
+              <div
+                class="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 blur-xl opacity-30"
+              ></div>
+              <div
+                class="absolute -bottom-4 -left-4 w-24 h-24 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 blur-xl opacity-30"
+              ></div>
+            </div>
+
+            <!-- Timeline -->
+            <div
+              class="mt-8 bg-gray-800 bg-opacity-70 p-6 rounded-xl border border-gray-700 hover:border-indigo-500 transition duration-300"
+            >
+              <h3 class="text-xl font-semibold mb-4 flex items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 mr-2 text-indigo-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                Bilimsel Yolculuğum
+              </h3>
+              <div class="relative space-y-8 py-2 ml-2 my-1">
+                <!-- Zaman çizgisi dikey çizgi -->
+                <div
+                  class="absolute h-full w-0.5 bg-gradient-to-b from-indigo-500 to-cyan-500 left-0 top-0"
+                ></div>
+
+                <!-- Zaman noktaları -->
+                <div class="relative">
+                  <div
+                    class="absolute h-4 w-4 rounded-full bg-indigo-500 left-0 transform -translate-x-1.5"
+                  ></div>
+                  <div class="ml-6">
+                    <h4 class="text-indigo-300 font-medium">2016</h4>
+                    <p class="text-gray-300">
+                      İlk teleskopumu aldım ve astronomi ile tanıştım
+                    </p>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <div
+                    class="absolute h-4 w-4 rounded-full bg-indigo-500 left-0 transform -translate-x-1.5"
+                  ></div>
+                  <div class="ml-6">
+                    <h4 class="text-indigo-300 font-medium">2022</h4>
+                    <p class="text-gray-300">
+                      Tıp fakültesine başladım ve bilimsel araştırmalara ilgi
+                      duymaya başladım
+                    </p>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <div
+                    class="absolute h-4 w-4 rounded-full bg-indigo-500 left-0 transform -translate-x-1.5"
+                  ></div>
+                  <div class="ml-6">
+                    <h4 class="text-indigo-300 font-medium">2023</h4>
+                    <p class="text-gray-300">
+                      İlk bilimsel makale incelememi yayınladım
+                    </p>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <div
+                    class="absolute h-4 w-4 rounded-full bg-indigo-500 left-0 transform -translate-x-1.5"
+                  ></div>
+                  <div class="ml-6">
+                    <h4 class="text-indigo-300 font-medium">2024</h4>
+                    <p class="text-gray-300">
+                      Kökhücre Dergisinde makale yazılmasına katkı sağlamaya ve
+                      Journal-Club bünyesinde moderatörlük yapmaya başladım
+                    </p>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <div
+                    class="absolute h-4 w-4 rounded-full bg-purple-500 left-0 transform -translate-x-1.5"
+                  ></div>
+                  <div class="ml-6">
+                    <h4 class="text-purple-300 font-medium">2025</h4>
+                    <p class="text-gray-300">LoL'ü bıraktım.</p>
+                  </div>
+                </div>
+
+                <div class="relative">
+                  <div
+                    class="absolute h-4 w-4 rounded-full bg-cyan-500 left-0 transform -translate-x-1.5 border-2 border-indigo-900"
+                  ></div>
+                  <div class="ml-6">
+                    <h4 class="text-cyan-300 font-medium">Şu An</h4>
+                    <p class="text-gray-300">
+                      Bilimsel keşif yolculuğuma devam ediyorum
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Medicine Section -->
+    <section id="medicine" class="py-20 relative overflow-hidden">
+      <!-- Decorative backgrounds -->
+      <div
+        class="absolute top-1/3 right-0 w-80 h-80 bg-indigo-900/30 rounded-full filter blur-3xl"
+      ></div>
+      <div
+        class="absolute bottom-1/4 left-0 w-80 h-80 bg-blue-900/30 rounded-full filter blur-3xl"
+      ></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Tıp Yolculuğum</h2>
+          <div
+            class="h-1 w-20 bg-gradient-to-r from-indigo-500 to-cyan-500 mx-auto"
+          ></div>
+          <p class="text-gray-300 mt-4 max-w-2xl mx-auto">
+            İnsan vücudunun karmaşık sistemlerini anlamak ve sağlığı
+            iyileştirmek için çıktığım bilimsel serüven
+          </p>
+        </div>
+
+        <!-- Medicine Cards -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 medicine-cards"
+        >
+          <!-- Card 1 -->
+          <div
+            class="bg-gray-800/70 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 hover:border-indigo-500 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-lg hover:shadow-indigo-500/20 medicine-card"
+          >
+            <div class="h-48 overflow-hidden relative">
+              <!-- resim yerine icon 
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-indigo-600/80 to-purple-700/80 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white/80" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div> -->
+              <img
+                src="/mahmuteminok/src/img/neurology.jpg"
+                class="w-full h-full object-cover"
+                alt="Nöroloji"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2 text-indigo-300">
+                Nöroloji Araştırmaları
+              </h3>
+              <p class="text-gray-300 mb-4">
+                İnsan beyninin gizemli dünyasını keşfetmek ve nörolojik
+                hastalıkların tedavisi için yeni yaklaşımlar geliştirmek üzerine
+                çalışmalar.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="px-2 py-1 bg-indigo-900/50 rounded-full text-xs text-indigo-200"
+                  >Beyin Haritalama</span
+                >
+                <span
+                  class="px-2 py-1 bg-indigo-900/50 rounded-full text-xs text-indigo-200"
+                  >Nöroplastisite</span
+                >
+                <span
+                  class="px-2 py-1 bg-indigo-900/50 rounded-full text-xs text-indigo-200"
+                  >Bilişsel İşlevler</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div
+            class="bg-gray-800/70 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 hover:border-indigo-500 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-lg hover:shadow-indigo-500/20 medicine-card"
+          >
+            <div class="h-48 overflow-hidden relative">
+              <!-- <div
+                            class="absolute inset-0 bg-gradient-to-br from-blue-600/80 to-cyan-700/80 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white/80" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg>
+                        </div> -->
+              <img
+                src="src/img/cardiology.jpg"
+                class="w-full h-full object-cover"
+                alt="Kardiyoloji"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2 text-cyan-300">
+                Kardiyoloji Çalışmaları
+              </h3>
+              <p class="text-gray-300 mb-4">
+                Kalp sağlığı, kalp hastalıklarının erken teşhisi ve tedavisine
+                yönelik araştırmalar ve klinik uygulamalar.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="px-2 py-1 bg-cyan-900/50 rounded-full text-xs text-cyan-200"
+                  >EKG Analizi</span
+                >
+                <span
+                  class="px-2 py-1 bg-cyan-900/50 rounded-full text-xs text-cyan-200"
+                  >Kalp Görüntüleme</span
+                >
+                <span
+                  class="px-2 py-1 bg-cyan-900/50 rounded-full text-xs text-cyan-200"
+                  >Preventif Kardiyoloji</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div
+            class="bg-gray-800/70 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 hover:border-indigo-500 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-lg hover:shadow-indigo-500/20 medicine-card"
+          >
+            <div class="h-48 overflow-hidden relative">
+              <!-- <div
+                            class="absolute inset-0 bg-gradient-to-br from-purple-600/80 to-pink-700/80 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white/80" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                            </svg>
+                        </div> -->
+              <img
+                src="/mahmuteminok/src/img/bioinformatics.jpg"
+                class="w-full h-full object-cover"
+                alt="Biyoinformatik"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2 text-purple-300">
+                Tıbbi Araştırma Yöntemleri
+              </h3>
+              <p class="text-gray-300 mb-4">
+                Modern tıp araştırmalarında kullanılan yenilikçi yöntemler, veri
+                analizi ve klinik çalışmaların tasarımı.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="px-2 py-1 bg-purple-900/50 rounded-full text-xs text-purple-200"
+                  >Klinik Çalışmalar</span
+                >
+                <span
+                  class="px-2 py-1 bg-purple-900/50 rounded-full text-xs text-purple-200"
+                  >Biyoistatistik</span
+                >
+                <span
+                  class="px-2 py-1 bg-purple-900/50 rounded-full text-xs text-purple-200"
+                  >Biyoinformatik</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Feature Section -->
+        <div
+          class="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center interactive-feature"
+        >
+          <div class="order-2 lg:order-1">
+            <h3 class="text-2xl font-bold mb-4 text-white">
+              Tıp Eğitimimde Odak Noktalarım
+            </h3>
+            <p class="text-gray-300 mb-6">
+              Tıp fakültesindeki eğitimim boyunca, çeşitli alanlarda kendimi
+              geliştirmek için özel bir çaba gösteriyorum. Özellikle ilgi
+              duyduğum konular:
+            </p>
+
+            <!-- Interactive tabs -->
+            <div class="space-y-3 medicine-tabs">
+              <div
+                class="tab-container bg-gray-800/50 backdrop-blur-sm rounded-lg overflow-hidden cursor-pointer border border-gray-700 hover:border-indigo-500 transition-all duration-300 medicine-tab"
+              >
+                <div class="tab-header p-4 flex items-center justify-between">
+                  <h4 class="text-lg font-medium text-indigo-300">
+                    Nörolojik Bilimler
+                  </h4>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-indigo-400 tab-icon"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <div class="tab-content p-4 pt-0 hidden">
+                  <p class="text-gray-300">
+                    Beyin ve sinir sistemi fonksiyonlarının derinlemesine
+                    incelenmesi. Nörodejeneratif hastalıklar ve beyin-makine
+                    arayüzleri konusundaki gelişmeleri takip ediyorum.
+                  </p>
+                </div>
+              </div>
+
+              <div
+                class="tab-container bg-gray-800/50 backdrop-blur-sm rounded-lg overflow-hidden cursor-pointer border border-gray-700 hover:border-indigo-500 transition-all duration-300 medicine-tab"
+              >
+                <div class="tab-header p-4 flex items-center justify-between">
+                  <h4 class="text-lg font-medium text-cyan-300">
+                    Kardiyoloji ve Dolaşım Sistemi
+                  </h4>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-cyan-400 tab-icon"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <div class="tab-content p-4 pt-0 hidden">
+                  <p class="text-gray-300">
+                    Kalp ve damar hastalıklarının teşhis ve tedavisinde
+                    yenilikçi yaklaşımlar. Kalp cerrahisi ve yapay kalp
+                    teknolojileri hakkında kapsamlı araştırmalar yapıyorum.
+                  </p>
+                </div>
+              </div>
+
+              <div
+                class="tab-container bg-gray-800/50 backdrop-blur-sm rounded-lg overflow-hidden cursor-pointer border border-gray-700 hover:border-indigo-500 transition-all duration-300 medicine-tab"
+              >
+                <div class="tab-header p-4 flex items-center justify-between">
+                  <h4 class="text-lg font-medium text-purple-300">
+                    Tıbbi Etik ve Felsefe
+                  </h4>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-purple-400 tab-icon"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <div class="tab-content p-4 pt-0 hidden">
+                  <p class="text-gray-300">
+                    Modern tıbbın etik boyutları ve felsefi temelleri. Tıbbi
+                    karar verme süreçlerinde etik ilkelerin uygulanması ve hasta
+                    hakları konularını inceliyorum.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8">
+              <a
+                href="#"
+                class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors duration-300"
+              >
+                Tıbbi Projelerim
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 ml-2"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="order-1 lg:order-2 relative">
+            <!-- 3D Model or Animation Container -->
+            <div
+              class="w-full aspect-square relative rounded-xl overflow-hidden"
+            >
+              <!-- Three.js container for brain model -->
+              <div
+                id="brain-model-container"
+                class="absolute inset-0 flex items-center justify-center"
+              >
+                <!-- Loading indicator while model loads -->
+                <div
+                  id="brain-model-loading"
+                  class="text-indigo-300/90 text-center"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="animate-spin h-10 w-10 mx-auto mb-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      class="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      stroke-width="4"
+                    ></circle>
+                    <path
+                      class="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  <p>Beyin modeli yükleniyor...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Astronomy Section -->
+    <section id="astronomy" class="py-20 relative overflow-hidden">
+      <!-- Decorative backgrounds -->
+      <div
+        class="absolute top-1/3 left-0 w-80 h-80 bg-purple-900/30 rounded-full filter blur-3xl"
+      ></div>
+      <div
+        class="absolute bottom-1/4 right-0 w-80 h-80 bg-indigo-900/30 rounded-full filter blur-3xl"
+      ></div>
+      <div
+        class="absolute top-1/2 right-1/3 w-40 h-40 bg-cyan-900/20 rounded-full filter blur-xl"
+      ></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-16 astronomy-title-container">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4 astronomy-heading">
+            Astronomi Tutkum
+          </h2>
+          <div
+            class="h-1 w-20 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto astronomy-divider"
+          ></div>
+          <p class="text-gray-300 mt-4 max-w-2xl mx-auto astronomy-description">
+            Evrenin derinliklerini keşfetme yolculuğum ve gökyüzünün sırlarına
+            açılan pencerem: Teleskobum
+          </p>
+        </div>
+
+        <!-- Main Telescope Display -->
+        <div
+          class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-16 telescope-content"
+        >
+          <div class="order-2 lg:order-1">
+            <h3 class="text-2xl font-bold mb-3 text-indigo-300 telescope-title">
+              Teleskop ismi: Mamudo
+            </h3>
+            <p class="text-gray-300 mb-6 telescope-description">
+              Gökyüzü gözlemlerim için kullandığım ana ekipman, kendi emeğimle
+              oluşturduğum el yapımı F/7 Newtonian teleskobumdur. Yüksek
+              kaliteli optik performansı ve sağlam yapısıyla, derin uzayın
+              sırlarını keşfetmemi sağlıyor.
+            </p>
+            <div class="space-y-4 telescope-specs-container">
+              <div
+                class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-5 border border-indigo-500/30 hover:border-indigo-500/80 transition duration-300 telescope-specs"
+              >
+                <h4 class="text-lg font-medium text-purple-300 mb-2">
+                  Teknik Özellikler
+                </h4>
+                <ul class="space-y-2 text-gray-300">
+                  <li class="flex items-start">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 mr-2 text-cyan-400 flex-shrink-0 mt-0.5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span><strong>Optik Tasarım:</strong> Newtonian</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 mr-2 text-cyan-400 flex-shrink-0 mt-0.5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span><strong>Açıklık:</strong> Yaklaşık 150 mm</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 mr-2 text-cyan-400 flex-shrink-0 mt-0.5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span><strong>Odak Uzunluğu:</strong> 1050 mm</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 mr-2 text-cyan-400 flex-shrink-0 mt-0.5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span><strong>Azami Faydalı Büyütme:</strong> 300x</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 mr-2 text-cyan-400 flex-shrink-0 mt-0.5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span><strong>Yıldız Sınır Parlaklığı:</strong> 13,6</span>
+                  </li>
+                </ul>
+              </div>
+              <div
+                class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-5 border border-indigo-500/30 hover:border-indigo-500/80 transition duration-300 telescope-accessories"
+              >
+                <h4 class="text-lg font-medium text-purple-300 mb-2">
+                  Teleskop Aksesuarları
+                </h4>
+                <p class="text-gray-300 mb-4">
+                  Gözlemlerimi geliştirmek için kullandığım özel ekipmanlar:
+                </p>
+                <ul class="space-y-2 text-gray-300">
+                  <li class="flex items-start">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 mr-2 text-cyan-400 flex-shrink-0 mt-0.5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span
+                      ><strong>Okülerler:</strong> Celestron X-Cel LX serisi
+                      (25mm, 9mm) ve Baader Hyperion 3.5mm</span
+                    >
+                  </li>
+                  <li class="flex items-start">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 mr-2 text-cyan-400 flex-shrink-0 mt-0.5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span
+                      ><strong>Filtreler:</strong> Astronomik CLS, Baader
+                      Planetary Set ve Orion SkyGlow</span
+                    >
+                  </li>
+                  <li class="flex items-start">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 mr-2 text-cyan-400 flex-shrink-0 mt-0.5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span
+                      ><strong>Kamera Ekipmanları:</strong> ZWO ASI294MC Pro ve
+                      Canon EOS 80D DSLR adaptörleri</span
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div
+            class="order-1 lg:order-2 relative py-8 px-6 telescope-image-container"
+          >
+            <div
+              class="relative z-10 bg-gray-800 bg-opacity-50 p-4 rounded-2xl shadow-xl mx-auto max-w-md telescope-image-frame border border-indigo-500/30"
+            >
+              <div class="aspect-w-1 aspect-h-1">
+                <div
+                  class="w-full h-full rounded-xl overflow-hidden border-3 border-indigo-500/40 telescope-image-border"
+                >
+                  <img
+                    src="src/img/telescope.png"
+                    class="w-full h-full object-cover telescope-image"
+                    alt="Teleskop"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Instagram Link Section -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-16">
+        <div
+          class="bg-gray-800/70 backdrop-blur-sm rounded-xl p-6 border border-indigo-500/30 hover:border-indigo-500 transition duration-300 transform hover:-translate-y-1 text-center instagram-container"
+        >
+          <h3 class="text-xl font-semibold mb-4 text-purple-300">
+            Astronomi Fotoğraflarım
+          </h3>
+          <p class="text-gray-300 mb-6">
+            Teleskopumla çektiğim gökyüzü fotoğrafları için Instagram hesabımı
+            ziyaret edebilirsiniz.
+          </p>
+          <a
+            href="https://www.instagram.com/mahmute_ok"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center px-6 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-lg hover:from-purple-700 hover:to-indigo-700 transition duration-500 group instagram-link"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 mr-3"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+              />
+            </svg>
+            @mahmute_ok
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative overflow-hidden">
+      <!-- Decorative backgrounds -->
+      <div
+        class="absolute top-1/3 right-0 w-80 h-80 bg-indigo-900/30 rounded-full filter blur-3xl"
+      ></div>
+      <div
+        class="absolute bottom-1/4 left-0 w-80 h-80 bg-purple-900/30 rounded-full filter blur-3xl"
+      ></div>
+      <div
+        class="absolute top-1/2 left-1/3 w-40 h-40 bg-cyan-900/20 rounded-full filter blur-xl"
+      ></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-16 contact-title-container">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4 contact-heading">
+            İletişim
+          </h2>
+          <div
+            class="h-1 w-20 bg-gradient-to-r from-purple-500 to-indigo-500 mx-auto contact-divider"
+          ></div>
+          <p class="text-gray-300 mt-4 max-w-2xl mx-auto contact-description">
+            Bilimsel konularda iş birliği, sorular veya herhangi bir iletişim
+            için aşağıdaki kanallardan bana ulaşabilirsiniz
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+          <!-- Contact Methods -->
+          <div class="space-y-6">
+            <!-- Email Card -->
+            <div
+              class="bg-gray-800/70 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-indigo-500 transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-indigo-500/20 contact-card"
+            >
+              <h3
+                class="text-xl font-semibold mb-4 flex items-center text-indigo-300"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 mr-2 text-indigo-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+                E-posta
+              </h3>
+              <p class="text-gray-300 mb-4">
+                Bana doğrudan e-posta göndermek için:
+              </p>
+              <a
+                href="mailto:mahmut.emin.ok@example.com"
+                class="inline-flex items-center text-indigo-400 hover:text-indigo-300 transition-colors text-lg"
+              >
+                mahmut.emin.ok@example.com
+              </a>
+            </div>
+
+            <!-- Social Media Links -->
+            <div
+              class="bg-gray-800/70 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-indigo-500 transition duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-indigo-500/20 contact-card"
+            >
+              <h3
+                class="text-xl font-semibold mb-4 flex items-center text-purple-300"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 mr-2 text-purple-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"
+                  />
+                </svg>
+                Sosyal Medya
+              </h3>
+              <div class="grid grid-cols-2 gap-4 mt-4">
+                <a
+                  href="https://www.instagram.com/mahmute_ok"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center p-4 bg-gradient-to-br from-purple-600/20 to-pink-600/20 rounded-lg hover:from-purple-600/40 hover:to-pink-600/40 transition duration-300 group social-link"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-8 w-8 mr-3 text-pink-400"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                    />
+                  </svg>
+                  <span
+                    class="text-gray-300 group-hover:text-white transition-colors"
+                    >Instagram</span
+                  >
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/mahmut-emin-ok-5b931a240/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center p-4 bg-gradient-to-br from-blue-600/20 to-indigo-600/20 rounded-lg hover:from-blue-600/40 hover:to-indigo-600/40 transition duration-300 group social-link"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-8 w-8 mr-3 text-blue-400"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"
+                    />
+                  </svg>
+                  <span
+                    class="text-gray-300 group-hover:text-white transition-colors"
+                    >LinkedIn</span
+                  >
+                </a>
+                <a
+                  href="https://x.com/MahmutEminOK6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center p-4 bg-gradient-to-br from-gray-800/20 to-gray-700/20 rounded-lg hover:from-gray-800/40 hover:to-gray-700/40 transition duration-300 group social-link"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-8 w-8 mr-3 text-gray-300"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                    />
+                  </svg>
+                  <span
+                    class="text-gray-300 group-hover:text-white transition-colors"
+                    >X</span
+                  >
+                </a>
+                <a
+                  href="https://independent.academia.edu/MahmutEminOK"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center p-4 bg-gradient-to-br from-gray-700/20 to-gray-600/20 rounded-lg hover:from-gray-700/40 hover:to-gray-600/40 transition duration-300 group social-link"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-8 w-10 mr-1 text-gray-400"
+                    fill="currentColor"
+                    viewBox="130 140 20 20"
+                  >
+                    <path
+                      d="M144.2,156.9l-6.3-15.8h-4.5l0.8,2l-5.4,13.8c-0.2,0.7-0.8,0.8-1.4,0.9v0.9h5.2v-0.9l0,0l0,0l0,0l0,0   c-1.4-0.1-2.2-0.3-1.6-1.8c0.1-0.1,0.5-1.2,1-2.6h6.4l0.9,2.3c0.1,0.4,0.2,0.7,0.2,1c0,0.8-0.7,1.1-2,1.1v0.9h8.2v-0.9   C145,157.7,144.4,157.5,144.2,156.9z M132.6,151.7c1-2.5,2.1-5.4,2.5-6.5l2.6,6.5H132.6z"
+                    />
+                  </svg>
+                  <span
+                    class="text-gray-300 group-hover:text-white transition-colors"
+                    >Academia</span
+                  >
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Visitor Notes Card -->
+          <div
+            class="bg-gray-800/70 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-indigo-500 transition duration-300 contact-form-container"
+          >
+            <h3
+              class="text-xl font-semibold mb-4 flex items-center text-cyan-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 mr-2 text-cyan-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                />
+              </svg>
+              Ziyaretçiler için Not
+            </h3>
+            <div class="space-y-5">
+              <div class="bg-gray-900/50 border border-gray-700 rounded-lg p-5">
+                <p class="text-gray-300 mb-3 text-lg">
+                  Merhaba sevgili ziyaretçi! 👋
+                </p>
+                <p class="text-gray-300 mb-3">
+                  Bilim ve keşif dolu dünyama hoş geldin. Bu yolculukta hem tıp
+                  hem de astronomi tutkumla tanışabilirsin.
+                </p>
+                <p class="text-gray-300">
+                  Tarihte ilk defa iki uzak bilim dalının kesiştiği ve birbirini
+                  zenginleştirdiği bir dönemdeyiz. Modern tıp teknikleri
+                  sayesinde astronotların uzay yolculuklarında karşılaştıkları
+                  sağlık sorunlarını anlayabiliyoruz, astronomi araştırmalarında
+                  kullanılan görüntüleme teknolojileri de tıbbi tanı
+                  yöntemlerimizi geliştiriyor.
+                </p>
+              </div>
+
+              <!-- Message from Me -->
+              <div class="signature-container mt-5 text-right">
+                <p class="text-indigo-300 font-semibold">
+                  Merakla ve bilimle kal!
+                </p>
+                <p class="text-gray-400 italic">- Mahmut Emin OK</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 bg-gray-900 relative overflow-hidden">
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"
+      ></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="flex flex-col items-center justify-center">
+          <h2 class="text-xl font-bold text-white mb-2">Mahmut Emin OK</h2>
+          <p class="text-gray-400 text-sm mb-4">
+            Tıp Öğrencisi & Astronomi Tutkunu
+          </p>
+          <div class="flex space-x-4 mb-6">
+            <a
+              href="https://www.instagram.com/mahmute_ok"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-gray-400 hover:text-white transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://x.com/MahmutEminOK6"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-gray-400 hover:text-white transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/mahmut-emin-ok-5b931a240/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-gray-400 hover:text-white transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://independent.academia.edu/MahmutEminOK"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-gray-400 hover:text-white transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-8"
+                fill="currentColor"
+                viewBox="130 140 20 20"
+              >
+                <path
+                  d="M144.2,156.9l-6.3-15.8h-4.5l0.8,2l-5.4,13.8c-0.2,0.7-0.8,0.8-1.4,0.9v0.9h5.2v-0.9l0,0l0,0l0,0l0,0   c-1.4-0.1-2.2-0.3-1.6-1.8c0.1-0.1,0.5-1.2,1-2.6h6.4l0.9,2.3c0.1,0.4,0.2,0.7,0.2,1c0,0.8-0.7,1.1-2,1.1v0.9h8.2v-0.9   C145,157.7,144.4,157.5,144.2,156.9z M132.6,151.7c1-2.5,2.1-5.4,2.5-6.5l2.6,6.5H132.6z"
+                />
+              </svg>
+            </a>
+          </div>
+          <div
+            class="h-px w-16 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-6"
+          ></div>
+          <p class="text-gray-500 text-sm">
+            © <span id="current-year"></span> Mahmut Emin OK
+          </p>
+          <!-- Attribution for 3D Brain Model -->
+          <p class="text-gray-500 text-xs mt-2">
+            Beyin modeli:
+            <a
+              href="https://sketchfab.com/3d-models/brain-areas-d64608a3978b47d8a39c5a15795ca8c4"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-indigo-400 hover:text-indigo-300 transition-colors"
+              >Sketchfab</a
+            >
+          </p>
+        </div>
+      </div>
+      <!-- Developer credit moon -->
+      <div class="hidden sm:block absolute bottom-8 right-8 group z-10">
+        <div
+          class="dev-moon w-12 h-12 bg-gradient-to-br from-gray-300 to-gray-500 rounded-full shadow-lg relative overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-110"
+        >
+          <div
+            class="absolute w-2 h-2 bg-gray-600/30 rounded-full top-1 left-2"
+          ></div>
+          <div
+            class="absolute w-1.5 h-1.5 bg-gray-600/20 rounded-full top-3 left-4"
+          ></div>
+          <div
+            class="absolute w-2.5 h-2.5 bg-gray-600/30 rounded-full bottom-1 right-1"
+          ></div>
+        </div>
+
+        <div
+          class="absolute bottom-full right-0 mb-2 w-64 p-3 bg-gray-800 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm pointer-events-none"
+        >
+          <p class="text-gray-200 mb-1">
+            Bu websitesi
+            <span class="text-indigo-300 font-medium">Sercan Ümit ÖNER</span>
+            tarafından sevgiyle geliştirilmiştir.💫
+          </p>
+          <p class="text-gray-300">
+            İletişim:
+            <a
+              href="mailto:sercanumitoner@gmail.com"
+              class="text-cyan-400 hover:underline"
+              >sercanumitoner@gmail.com</a
+            >
+          </p>
+          <div
+            class="absolute bottom-0 right-4 transform translate-y-1/2 rotate-45 w-2 h-2 bg-gray-800"
+          ></div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/mahmuteminok/src/js/app.js" defer></script>
+  </body>
+</html>
