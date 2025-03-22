@@ -821,7 +821,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     loader.load(
       // Model URL
-      "/mahmutemin/src/img/brain_areas.glb",
+      "/mahmuteminok/src/img/brain_areas.glb",
 
       // onLoad callback
       function (gltf) {
